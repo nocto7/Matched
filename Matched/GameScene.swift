@@ -26,18 +26,22 @@ class GameScene: SKScene {
         
         let grid = CardGridInfo(items: items, windowSize: self.size)
         
-        let symbols = getSymbols(number: items / 2)
-        var allSymbols = symbols + symbols // two copies of each cards
-        print (allSymbols)
-        allSymbols.shuffle()
+        let symbols = CardGenerator.shared.getSymbols(number: items / 2)
+        var cardInfos = [CardInfo]()
+        for symbol in symbols {
+            let cardInfo = CardInfo(name: symbol, face: CardGenerator.shared.getFaceImage(text: symbol, size: grid.cardSize))
+            cardInfos.append(cardInfo)
+        }
+        var deck = cardInfos + cardInfos // duplicate each card
+        deck.shuffle()
         
-        let cardBack = drawCardBack(size: grid.cardSize)
+        let cardBack = CardGenerator.shared.drawCardBack(size: grid.cardSize)
         
         for r in (0 ..< grid.rows).reversed() { // backwards so missing cards are at bottom of screen
             for c in 0 ..< grid.cols {
                 let card = CardNode(color: .red, size: grid.cardSize)
-                if let symbol = allSymbols.popLast() {
-                    card.setup(text: symbol, back: cardBack)
+                if let cardInfo = deck.popLast() {
+                    card.setup(info: cardInfo, back: cardBack)
                     let move = SKAction.move(to: grid.position(row: r, col: c), duration: 1.5)
                     card.position = CGPoint(x: -100, y: -100)
                     card.run(move)
@@ -48,31 +52,12 @@ class GameScene: SKScene {
         }
     }
     
-   
-    
-    func getSymbols(number: Int) -> [String] {
-        let emojis = "❤️😀🐶⭐️🍏🏳️‍🌈📕📱🏖⛵️🚛🧩🏄🏾‍♂️🤸🏼‍♀️💙💚💛🧡💝😂🥰😜😎🥶🤗☠️👻🎃😺😻👍💋👧🏾👀👵🏼👳🏾‍♀️🧕🏽👮🏽‍♂️👩🏻‍⚕️👩🏽‍🎤👩🏻‍💻👩🏼‍🔬👰🏿🦹🏿‍♀️🧟‍♀️🧟‍♂️🤱🏽💇🏽‍♀️💆🏿‍♂️👯‍♂️🚶🏼‍♀️💃🏾🦊🐷🐸🐰🐹🙊🐔🐣"
-        var possSymbols = [String]()
-       
-        for char in emojis {
-            possSymbols.append(String(char))
-        }
-         print("there are \(possSymbols.count) possible emojis")
-        possSymbols.shuffle()
-        var symbols = [String]()
-        for _ in 0..<number {
-            symbols.append(possSymbols.popLast()!)
-        }
-        return symbols
-    }
-    
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let tappedNodes = nodes(at: location)
         if let tappedCard = tappedNodes.first as? CardNode {
-            print("touched game: \(tappedCard.text)")
+            print("touched game: \(String(describing: tappedCard.info))")
             if (tappedCard == cardSelected) {
                 // tapping on same card twice does nothing
                 return
@@ -110,32 +95,13 @@ class GameScene: SKScene {
                 tappedCard.revealCard() {
                     tappedCard.concealCard()
                     otherCard?.concealCard()
-                    
                 }
-                
-                
             }
         }
     }
     
     
-    func drawCardBack(size: CGSize) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: size)
-        let img = renderer.image { (ctx) in
-            let rectangle = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            let cornerRadius = size.width / 10
-            let roundedRect = UIBezierPath(roundedRect: rectangle, cornerRadius: cornerRadius)
-            ctx.cgContext.setFillColor(ColourManager.shared.regular)
-            ctx.cgContext.setStrokeColor(ColourManager.shared.pale)
-            ctx.cgContext.setLineWidth(5)
-            
-            //ctx.cgContext.addRect(rectangle)
-            ctx.cgContext.addPath(roundedRect.cgPath)
-            ctx.cgContext.drawPath(using: .fillStroke)
-            
-        }
-        return img
-    }
+
     
     func isGameFinished() {
         print("number of cards left: \(cards.count)")

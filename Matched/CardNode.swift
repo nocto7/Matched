@@ -12,13 +12,13 @@ import UIKit
 class CardNode: SKSpriteNode {
     var faceImage: UIImage!
     var backImage: UIImage!
-    var text: String = ""
+    var info: CardInfo!
     var matched = false
     var revealed = false
     
-    func setup(text: String, back: UIImage) {
-        self.text = text
-        name = text
+    func setup(info: CardInfo, back: UIImage) {
+        self.info = info
+        name = info.name
        // self.isUserInteractionEnabled = true
         faceImage = drawCardFace(size: size)
         self.backImage = back
@@ -37,39 +37,12 @@ class CardNode: SKSpriteNode {
             
             ctx.cgContext.addPath(roundedRect.cgPath)
             ctx.cgContext.drawPath(using: .fillStroke)
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-           
-            var attributedString: NSAttributedString
-            var attrs: [NSAttributedString.Key: Any]
-            var fontSize = 36
-            var stringSize = CGSize(width: 0, height: 0)
-            while stringSize.width < size.width {
-                fontSize += 2
-                attrs = [
-                    .font: UIFont.systemFont(ofSize: CGFloat(fontSize)),
-                    .paragraphStyle: paragraphStyle
-                ]
-                
-                attributedString = NSAttributedString(string: text, attributes: attrs)
-                stringSize = attributedString.size()
-            }
-            print("picked \(fontSize) font")
-            attrs = [
-                .font: UIFont.systemFont(ofSize: CGFloat(fontSize)),
-                .paragraphStyle: paragraphStyle
-            ]
-            
-            attributedString = NSAttributedString(string: text, attributes: attrs)
-            stringSize = attributedString.size()
-            attributedString.draw(at: CGPoint(x: (size.width - stringSize.width) / 2, y: (size.height - stringSize.height) / 2))
-            
+            ctx.cgContext.draw(info.face.cgImage!, in: rectangle)
         }
         return img
     }
     
-
+   
     func revealCard(completion: @escaping () -> Void) {
         let flip1 = SKAction.scaleX(to: 0, duration: 0.5)
         let face = SKAction.setTexture(SKTexture(image: faceImage))
