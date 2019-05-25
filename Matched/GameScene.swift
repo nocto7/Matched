@@ -22,65 +22,24 @@ class GameScene: SKScene {
     func level(items: Int) {
         
         ColourManager.shared.changeColour()
-        backgroundColor = UIColor(cgColor: ColourManager.shared.palest) //UIColor(named: "MyPurplePalest")!
+        backgroundColor = UIColor(cgColor: ColourManager.shared.palest)
         
-        // origin is in the centre of the screen
-        let screenWidth = self.size.width //view.bounds.size.width
-        let screenHeight = self.size.height
+        let grid = CardGridInfo(items: items, windowSize: self.size)
         
-        print("screen is \(screenWidth) x \(screenHeight)")
-        
-        let screenRatio = screenWidth / screenHeight
-        print("screen ratio is \(screenRatio)")
-        
-        let bestRows = sqrt(CGFloat(items) / screenRatio)
-        let bestCols = bestRows * screenRatio
-        print("best num of rows, cols is \(bestRows), \(bestCols)")
-        
-        // err on the side of making cards taller than they are wide
-        // i.e use more columns
-        let numCols = Int(ceil(bestCols))
-        var numRows = items / numCols
-        if (numRows * numCols < items) {
-            numRows += 1
-        }
-        print("using rows and cols \(numRows), \(numCols)")
-        
-        let cardNumber = numCols * numRows
-        
-        if (cardNumber%2 == 1) {
-            // odd number
-            print("odd number of card spaces, need to miss one out")
-        }
-        
-        let rowsFloat = CGFloat(numRows)
-        let colsFloat = CGFloat(numCols)
-        
-        let cardWidth = screenWidth /  (colsFloat + (colsFloat + 1) / 5.0)
-        let cardHeight = screenHeight / (rowsFloat + (rowsFloat + 1) / 5.0)
-        print("card size is \(cardWidth) x \(cardHeight)")
-        
-        let colSpacing = cardWidth / 5.0
-        let rowSpacing = cardHeight / 5.0
-        
-        let symbols = getSymbols(number: numRows * numCols / 2)
-        var allSymbols = symbols + symbols
+        let symbols = getSymbols(number: items / 2)
+        var allSymbols = symbols + symbols // two copies of each cards
         print (allSymbols)
         allSymbols.shuffle()
         
-        let cardBack = drawCardBack(size: CGSize(width: cardWidth, height: cardHeight))
+        let cardBack = drawCardBack(size: grid.cardSize)
         
-        for r in 0..<numRows {
-            for c in 0..<numCols {
-                let x = (cardWidth + colSpacing) * CGFloat(c) + colSpacing
-                let y = (cardHeight + rowSpacing) * CGFloat(r) + rowSpacing
-                let card = CardNode(color: .red, size: CGSize(width: cardWidth, height: cardHeight))
+        for r in (0 ..< grid.rows).reversed() { // backwards so missing cards are at bottom of screen
+            for c in 0 ..< grid.cols {
+                let card = CardNode(color: .red, size: grid.cardSize)
                 if let symbol = allSymbols.popLast() {
                     card.setup(text: symbol, back: cardBack)
-                    print("\(r), \(c) : \(x),\(y)")
-                    let move = SKAction.move(to: CGPoint(x: x + cardWidth / 2, y: y + cardHeight / 2), duration: 1.0)
-                    //card.position = CGPoint(x: x + cardWidth / 2, y: y + cardHeight / 2)
-                    card.position = CGPoint(x: 0, y: 0)
+                    let move = SKAction.move(to: grid.position(row: r, col: c), duration: 1.5)
+                    card.position = CGPoint(x: -100, y: -100)
                     card.run(move)
                     cards.append(card)
                     addChild(card)
@@ -88,6 +47,8 @@ class GameScene: SKScene {
             }
         }
     }
+    
+   
     
     func getSymbols(number: Int) -> [String] {
         let emojis = "❤️😀🐶⭐️🍏🏳️‍🌈📕📱🏖⛵️🚛🧩🏄🏾‍♂️🤸🏼‍♀️💙💚💛🧡💝😂🥰😜😎🥶🤗☠️👻🎃😺😻👍💋👧🏾👀👵🏼👳🏾‍♀️🧕🏽👮🏽‍♂️👩🏻‍⚕️👩🏽‍🎤👩🏻‍💻👩🏼‍🔬👰🏿🦹🏿‍♀️🧟‍♀️🧟‍♂️🤱🏽💇🏽‍♀️💆🏿‍♂️👯‍♂️🚶🏼‍♀️💃🏾🦊🐷🐸🐰🐹🙊🐔🐣"
@@ -180,7 +141,7 @@ class GameScene: SKScene {
         print("number of cards left: \(cards.count)")
         if cards.count == 0 {
             level += 1
-            var items = min((level + 1) * 4, 120) // 60 emojis limits the game
+            let items = min((level + 1) * 4, 120) // 60 emojis limits the game
             level(items: items )
         }
     }

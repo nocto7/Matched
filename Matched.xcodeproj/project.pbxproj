@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		47080B052293FB7B00166675 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47080B042293FB7B00166675 /* AppDelegate.swift */; };
-		47080B072293FB7B00166675 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 47080B062293FB7B00166675 /* GameScene.sks */; };
 		47080B0B2293FB7B00166675 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47080B0A2293FB7B00166675 /* GameScene.swift */; };
 		47080B0D2293FB7B00166675 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47080B0C2293FB7B00166675 /* GameViewController.swift */; };
 		47080B102293FB7B00166675 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47080B0E2293FB7B00166675 /* Main.storyboard */; };
@@ -17,6 +16,7 @@
 		47080B1D2293FBED00166675 /* CardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47080B1C2293FBED00166675 /* CardNode.swift */; };
 		47080B652295B12100166675 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47080B642295B12100166675 /* MyNavigationController.swift */; };
 		4799448022986D5B0009DAA9 /* ColourManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799447F22986D5B0009DAA9 /* ColourManager.swift */; };
+		479E9BAB2299322F000CF29A /* CardGridInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BAA2299322F000CF29A /* CardGridInfo.swift */; };
 		47DFAD452296D856006410B9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD442296D856006410B9 /* Coordinator.swift */; };
 		47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD462296D8A6006410B9 /* Storyboarded.swift */; };
 		47DFAD492296D987006410B9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD482296D987006410B9 /* MainCoordinator.swift */; };
@@ -25,7 +25,6 @@
 /* Begin PBXFileReference section */
 		47080B012293FB7B00166675 /* Matched.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matched.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47080B042293FB7B00166675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		47080B062293FB7B00166675 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		47080B0A2293FB7B00166675 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		47080B0C2293FB7B00166675 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		47080B0F2293FB7B00166675 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,6 +34,7 @@
 		47080B1C2293FBED00166675 /* CardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
 		47080B642295B12100166675 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		4799447F22986D5B0009DAA9 /* ColourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourManager.swift; sourceTree = "<group>"; };
+		479E9BAA2299322F000CF29A /* CardGridInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGridInfo.swift; sourceTree = "<group>"; };
 		47DFAD442296D856006410B9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		47DFAD462296D8A6006410B9 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		47DFAD482296D987006410B9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -74,8 +74,8 @@
 				47DFAD462296D8A6006410B9 /* Storyboarded.swift */,
 				4799447F22986D5B0009DAA9 /* ColourManager.swift */,
 				47080B042293FB7B00166675 /* AppDelegate.swift */,
-				47080B062293FB7B00166675 /* GameScene.sks */,
 				47080B0A2293FB7B00166675 /* GameScene.swift */,
+				479E9BAA2299322F000CF29A /* CardGridInfo.swift */,
 				47080B1C2293FBED00166675 /* CardNode.swift */,
 				47DFAD482296D987006410B9 /* MainCoordinator.swift */,
 				47080B0C2293FB7B00166675 /* GameViewController.swift */,
@@ -147,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47080B102293FB7B00166675 /* Main.storyboard in Resources */,
-				47080B072293FB7B00166675 /* GameScene.sks in Resources */,
 				47080B122293FB7D00166675 /* Assets.xcassets in Resources */,
 				47080B152293FB7D00166675 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -167,6 +166,7 @@
 				47080B0D2293FB7B00166675 /* GameViewController.swift in Sources */,
 				47080B652295B12100166675 /* MyNavigationController.swift in Sources */,
 				47080B052293FB7B00166675 /* AppDelegate.swift in Sources */,
+				479E9BAB2299322F000CF29A /* CardGridInfo.swift in Sources */,
 				47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */,
 				4799448022986D5B0009DAA9 /* ColourManager.swift in Sources */,
 			);
