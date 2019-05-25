@@ -9,12 +9,12 @@
 import UIKit
 
 class MyNavigationController: UINavigationController {
-
+    weak var coordinator: MainCoordinator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
     }
     
     override var shouldAutorotate: Bool {

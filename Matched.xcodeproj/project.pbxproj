@@ -20,6 +20,10 @@
 		479E9BAD22993CC9000CF29A /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BAC22993CC9000CF29A /* CardGenerator.swift */; };
 		479E9BAF229951CE000CF29A /* CardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BAE229951CE000CF29A /* CardInfo.swift */; };
 		479E9BB122997B6E000CF29A /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BB022997B6E000CF29A /* CardType.swift */; };
+		479E9BB322998970000CF29A /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BB222998970000CF29A /* ConnectionViewController.swift */; };
+		479E9BB52299936F000CF29A /* MultiplayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BB42299936F000CF29A /* MultiplayerGameViewController.swift */; };
+		479E9BB7229997D7000CF29A /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BB6229997D7000CF29A /* ClientViewController.swift */; };
+		479E9BB92299AEB3000CF29A /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BB82299AEB3000CF29A /* SessionManager.swift */; };
 		47DFAD452296D856006410B9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD442296D856006410B9 /* Coordinator.swift */; };
 		47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD462296D8A6006410B9 /* Storyboarded.swift */; };
 		47DFAD492296D987006410B9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD482296D987006410B9 /* MainCoordinator.swift */; };
@@ -41,6 +45,10 @@
 		479E9BAC22993CC9000CF29A /* CardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGenerator.swift; sourceTree = "<group>"; };
 		479E9BAE229951CE000CF29A /* CardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfo.swift; sourceTree = "<group>"; };
 		479E9BB022997B6E000CF29A /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
+		479E9BB222998970000CF29A /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
+		479E9BB42299936F000CF29A /* MultiplayerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerGameViewController.swift; sourceTree = "<group>"; };
+		479E9BB6229997D7000CF29A /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
+		479E9BB82299AEB3000CF29A /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		47DFAD442296D856006410B9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		47DFAD462296D8A6006410B9 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		47DFAD482296D987006410B9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -84,10 +92,14 @@
 				479E9BAC22993CC9000CF29A /* CardGenerator.swift */,
 				479E9BB022997B6E000CF29A /* CardType.swift */,
 				479E9BAA2299322F000CF29A /* CardGridInfo.swift */,
+				479E9BB82299AEB3000CF29A /* SessionManager.swift */,
 				47080B1C2293FBED00166675 /* CardNode.swift */,
+				479E9BB222998970000CF29A /* ConnectionViewController.swift */,
 				47DFAD482296D987006410B9 /* MainCoordinator.swift */,
 				479E9BAE229951CE000CF29A /* CardInfo.swift */,
 				47080B0C2293FB7B00166675 /* GameViewController.swift */,
+				479E9BB42299936F000CF29A /* MultiplayerGameViewController.swift */,
+				479E9BB6229997D7000CF29A /* ClientViewController.swift */,
 				47080B642295B12100166675 /* MyNavigationController.swift */,
 				47080B0E2293FB7B00166675 /* Main.storyboard */,
 				47080B112293FB7D00166675 /* Assets.xcassets */,
@@ -171,16 +183,20 @@
 				47080B0B2293FB7B00166675 /* GameScene.swift in Sources */,
 				47DFAD492296D987006410B9 /* MainCoordinator.swift in Sources */,
 				47080B1D2293FBED00166675 /* CardNode.swift in Sources */,
+				479E9BB7229997D7000CF29A /* ClientViewController.swift in Sources */,
 				47DFAD452296D856006410B9 /* Coordinator.swift in Sources */,
 				47080B0D2293FB7B00166675 /* GameViewController.swift in Sources */,
 				47080B652295B12100166675 /* MyNavigationController.swift in Sources */,
 				47080B052293FB7B00166675 /* AppDelegate.swift in Sources */,
 				479E9BAF229951CE000CF29A /* CardInfo.swift in Sources */,
+				479E9BB322998970000CF29A /* ConnectionViewController.swift in Sources */,
 				479E9BAB2299322F000CF29A /* CardGridInfo.swift in Sources */,
 				47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */,
 				4799448022986D5B0009DAA9 /* ColourManager.swift in Sources */,
 				479E9BAD22993CC9000CF29A /* CardGenerator.swift in Sources */,
+				479E9BB52299936F000CF29A /* MultiplayerGameViewController.swift in Sources */,
 				479E9BB122997B6E000CF29A /* CardType.swift in Sources */,
+				479E9BB92299AEB3000CF29A /* SessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
