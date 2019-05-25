@@ -20,9 +20,9 @@ class GameScene: SKScene {
     }
     
     func level(items: Int) {
-        
         ColourManager.shared.changeColour()
-        backgroundColor = UIColor(cgColor: ColourManager.shared.palest)
+        // this animates changing the background colour
+        run(SKAction.colorize(with: UIColor(cgColor: ColourManager.shared.palest), colorBlendFactor: 1.0, duration: 1.5))
         
         let grid = CardGridInfo(items: items, windowSize: self.size)
         
@@ -106,7 +106,7 @@ class GameScene: SKScene {
         print("number of cards left: \(cards.count)")
         if cards.count == 0 {
             level += 1
-            let items = min((level + 1) * 4, 24) // 4*3*2 card variations at the mo, limits the game
+            let items = min((level + 1) * 4, 32) // 4*4*2 card variations at the mo, limits the game
             level(items: items )
         }
     }

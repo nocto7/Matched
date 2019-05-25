@@ -30,30 +30,31 @@ struct CardGridInfo {
     }
     
     init (items: Int, windowSize: CGSize)  {
-        
         let screenWidth = windowSize.width
         let screenHeight = windowSize.height
-        
-        print("screen is \(screenWidth) x \(screenHeight)")
-        
         let screenRatio = screenWidth / screenHeight
-        print("screen ratio is \(screenRatio)")
         
         let bestRows = sqrt(CGFloat(items) / screenRatio)
         let bestCols = bestRows * screenRatio
-        print("best num of rows, cols is \(bestRows), \(bestCols)")
         
-        // err on the side of making cards taller than they are wide
-        // i.e use more columns
-        let numCols = Int(ceil(bestCols))
-        var numRows = items / numCols
-        while (numRows * numCols < items) {
-            numRows += 1
-        }
-        print("using rows and cols \(numRows), \(numCols)")
-        
-        if numCols * numRows < items {
-            print("there will be spaces in the layout")
+        var numCols: Int
+        var numRows: Int
+        if screenRatio < 1 {
+            // err on the side of making cards taller than they are wide
+            // i.e use more columns
+            numCols = Int(ceil(bestCols))
+            numRows = items / numCols
+            while (numRows * numCols < items) {
+                numRows += 1
+            }
+        } else {
+            // err on the side of making cards wider than they are tall
+            // i.e use more rows
+            numRows = Int(ceil(bestRows))
+            numCols = items / numRows
+            while (numRows * numCols < items) {
+                numCols += 1
+            }
         }
         
         let rowsFloat = CGFloat(numRows)
@@ -64,7 +65,6 @@ struct CardGridInfo {
         
         width = screenWidth /  (colsFloat + (colsFloat + 1) / 5.0)
         height = screenHeight / (rowsFloat + (rowsFloat + 1) / 5.0)
-        print("card size is \(width) x \(height)")
         
         colSpacing = width / 5.0
         rowSpacing = height / 5.0

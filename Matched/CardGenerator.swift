@@ -9,16 +9,14 @@
 import Foundation
 import UIKit
 
-
-
 class CardGenerator {
     static let shared = CardGenerator()
     
     func getNewCardNames(number items: Int) -> [CardType] {
         let shapes = ["circle", "square"]
-        let shades = ["pale","dark","different"]
+        let shades = ["pale","dark","diffpale","diffdark"]
         let numbers = Array(1...4)
-        // numoptions = 4*3*2
+        // numoptions = 4*4*2
         var cardTypes = [CardType]()
         for _ in 0..<items {
             var cardType: CardType
@@ -95,9 +93,12 @@ class CardGenerator {
             } else if type.shade == "dark" {
                 ctx.cgContext.setFillColor(ColourManager.shared.darkest)
                 ctx.cgContext.setStrokeColor(ColourManager.shared.dark)
-            } else  {
-                ctx.cgContext.setFillColor(ColourManager.shared.getAnotherColour())
-                ctx.cgContext.setStrokeColor(ColourManager.shared.dark)
+            } else if type.shade == "diffpale" {
+                ctx.cgContext.setFillColor(ColourManager.shared.diff1pale)
+                ctx.cgContext.setStrokeColor(ColourManager.shared.diff1)
+            } else if type.shade == "diffdark" {
+                ctx.cgContext.setFillColor(ColourManager.shared.diff1dark)
+                ctx.cgContext.setStrokeColor(ColourManager.shared.diff1)
             }
             ctx.cgContext.setLineWidth(5)
             for innerSquare in innerSquares {
@@ -107,12 +108,8 @@ class CardGenerator {
                     ctx.cgContext.addRect(innerSquare)
                 }
             }
-            
-           // ctx.cgContext.addPath(roundedRect.cgPath)
             ctx.cgContext.drawPath(using: .fillStroke)
-            
         }
         return img
     }
-    
 }

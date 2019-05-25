@@ -15,6 +15,9 @@ struct ColourScheme {
     let regular: CGColor
     let dark: CGColor
     let darkest: CGColor
+    let diff1: CGColor
+    let diff1pale: CGColor
+    let diff1dark: CGColor
 }
 
 class ColourManager {
@@ -53,6 +56,24 @@ class ColourManager {
         }
     }
     
+    var diff1: CGColor {
+        get {
+            return colourScheme.diff1
+        }
+    }
+    
+    var diff1dark: CGColor {
+        get {
+            return colourScheme.diff1dark
+        }
+    }
+    
+    var diff1pale: CGColor {
+        get {
+            return colourScheme.diff1pale
+        }
+    }
+    
     private init() {
         setupColourScheme()
     }
@@ -70,7 +91,14 @@ class ColourManager {
         let dark = UIColor(named: "My\(colour)Dark")!.cgColor
         let darkest = UIColor(named: "My\(colour)Darkest")!.cgColor
         
-        colourScheme = ColourScheme(pale: pale, palest: palest, regular: regular, dark: dark, darkest: darkest)
+        var anotherColour: String
+        repeat {
+            anotherColour = colours.randomElement()!
+        } while (anotherColour == currentColour)
+        let diff1 = UIColor(named: "My\(anotherColour)")!.cgColor
+        let diff1pale = UIColor(named: "My\(anotherColour)Pale")!.cgColor
+        let diff1dark = UIColor(named: "My\(anotherColour)Dark")!.cgColor
+        colourScheme = ColourScheme(pale: pale, palest: palest, regular: regular, dark: dark, darkest: darkest, diff1: diff1, diff1pale: diff1pale, diff1dark: diff1dark)
         currentColour = colour
     }
     
