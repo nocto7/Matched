@@ -19,6 +19,7 @@
 		479E9BAB2299322F000CF29A /* CardGridInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BAA2299322F000CF29A /* CardGridInfo.swift */; };
 		479E9BAD22993CC9000CF29A /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BAC22993CC9000CF29A /* CardGenerator.swift */; };
 		479E9BAF229951CE000CF29A /* CardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BAE229951CE000CF29A /* CardInfo.swift */; };
+		479E9BB122997B6E000CF29A /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479E9BB022997B6E000CF29A /* CardType.swift */; };
 		47DFAD452296D856006410B9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD442296D856006410B9 /* Coordinator.swift */; };
 		47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD462296D8A6006410B9 /* Storyboarded.swift */; };
 		47DFAD492296D987006410B9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD482296D987006410B9 /* MainCoordinator.swift */; };
@@ -39,6 +40,7 @@
 		479E9BAA2299322F000CF29A /* CardGridInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGridInfo.swift; sourceTree = "<group>"; };
 		479E9BAC22993CC9000CF29A /* CardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGenerator.swift; sourceTree = "<group>"; };
 		479E9BAE229951CE000CF29A /* CardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfo.swift; sourceTree = "<group>"; };
+		479E9BB022997B6E000CF29A /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		47DFAD442296D856006410B9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		47DFAD462296D8A6006410B9 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		47DFAD482296D987006410B9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				47080B042293FB7B00166675 /* AppDelegate.swift */,
 				47080B0A2293FB7B00166675 /* GameScene.swift */,
 				479E9BAC22993CC9000CF29A /* CardGenerator.swift */,
+				479E9BB022997B6E000CF29A /* CardType.swift */,
 				479E9BAA2299322F000CF29A /* CardGridInfo.swift */,
 				47080B1C2293FBED00166675 /* CardNode.swift */,
 				47DFAD482296D987006410B9 /* MainCoordinator.swift */,
@@ -177,6 +180,7 @@
 				47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */,
 				4799448022986D5B0009DAA9 /* ColourManager.swift in Sources */,
 				479E9BAD22993CC9000CF29A /* CardGenerator.swift in Sources */,
+				479E9BB122997B6E000CF29A /* CardType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

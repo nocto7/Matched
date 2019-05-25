@@ -68,8 +68,5 @@ struct CardGridInfo {
         
         colSpacing = width / 5.0
         rowSpacing = height / 5.0
-        
-//        let grid = CardGridInfo(rows: numRows, cols: numCols, width: cardWidth, height: cardHeight, rowSpacing: rowSpacing, colSpacing: colSpacing)
-    
     }
 }

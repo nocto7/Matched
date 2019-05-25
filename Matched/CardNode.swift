@@ -13,13 +13,10 @@ class CardNode: SKSpriteNode {
     var faceImage: UIImage!
     var backImage: UIImage!
     var info: CardInfo!
-    var matched = false
-    var revealed = false
     
     func setup(info: CardInfo, back: UIImage) {
         self.info = info
         name = info.name
-       // self.isUserInteractionEnabled = true
         faceImage = drawCardFace(size: size)
         self.backImage = back
         texture = SKTexture(image: backImage)
@@ -31,7 +28,7 @@ class CardNode: SKSpriteNode {
             let rectangle = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             let cornerRadius = size.width / 10
             let roundedRect = UIBezierPath(roundedRect: rectangle, cornerRadius: cornerRadius)
-            ctx.cgContext.setFillColor(ColourManager.shared.dark)
+            ctx.cgContext.setFillColor(ColourManager.shared.regular)
             ctx.cgContext.setStrokeColor(ColourManager.shared.pale)
             ctx.cgContext.setLineWidth(5)
             
@@ -41,7 +38,6 @@ class CardNode: SKSpriteNode {
         }
         return img
     }
-    
    
     func revealCard(completion: @escaping () -> Void) {
         let flip1 = SKAction.scaleX(to: 0, duration: 0.5)

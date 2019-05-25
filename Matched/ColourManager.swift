@@ -21,6 +21,7 @@ class ColourManager {
     static let shared = ColourManager()
     private var colourScheme: ColourScheme!
     var currentColour = "Yellow"
+    private let colours = ["Yellow", "Blue", "Pink", "Purple"]
     
     var pale: CGColor {
         get {
@@ -58,7 +59,7 @@ class ColourManager {
     
     
     private func setupColourScheme()  {
-        let colours = ["Yellow", "Blue", "Pink", "Purple"]
+        
         var colour: String
         repeat {
             colour = colours.randomElement()!
@@ -75,5 +76,13 @@ class ColourManager {
     
     public func changeColour() {
         setupColourScheme()
+    }
+    
+    public func getAnotherColour() -> CGColor {
+        var anotherColour: String
+        repeat {
+            anotherColour = colours.randomElement()!
+        } while (anotherColour == currentColour)
+        return UIColor(named: "My\(anotherColour)")!.cgColor
     }
 }

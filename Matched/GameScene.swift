@@ -26,10 +26,12 @@ class GameScene: SKScene {
         
         let grid = CardGridInfo(items: items, windowSize: self.size)
         
-        let symbols = CardGenerator.shared.getSymbols(number: items / 2)
+        let cardTypes = CardGenerator.shared.getNewCardNames(number: items / 2)
+        print(cardTypes)
+        
         var cardInfos = [CardInfo]()
-        for symbol in symbols {
-            let cardInfo = CardInfo(name: symbol, face: CardGenerator.shared.getFaceImage(text: symbol, size: grid.cardSize))
+        for cardType in cardTypes {
+            let cardInfo = CardInfo(name: cardType.name, face: CardGenerator.shared.getNewFaceImage(type: cardType, size: grid.cardSize))
             cardInfos.append(cardInfo)
         }
         var deck = cardInfos + cardInfos // duplicate each card
@@ -100,14 +102,11 @@ class GameScene: SKScene {
         }
     }
     
-    
-
-    
     func isGameFinished() {
         print("number of cards left: \(cards.count)")
         if cards.count == 0 {
             level += 1
-            let items = min((level + 1) * 4, 120) // 60 emojis limits the game
+            let items = min((level + 1) * 4, 24) // 4*3*2 card variations at the mo, limits the game
             level(items: items )
         }
     }
