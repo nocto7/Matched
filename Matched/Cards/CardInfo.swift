@@ -11,5 +11,6 @@ import UIKit
 
 struct CardInfo {
     var name: String
-    var face: UIImage 
+    var face: UIImage
+    var sequenceNumber: Int
 }

@@ -11,15 +11,15 @@ import SpriteKit
 import GameplayKit
 
 
-class MultiplayerGameScene: SKScene {
-    var cards = [CardNode]()
-    var cardSelected: CardNode?
+class MultiplayerGameScene: BaseGameScene {
+
     var level = 3 // start multiplayer game at higher level
     
     override func didMove(to view: SKView) {
         let items = (level + 1) * 4
         level(items: items)
     }
+    
     
     func level(items: Int) {
         ColourManager.shared.changeColour()
@@ -28,45 +28,33 @@ class MultiplayerGameScene: SKScene {
         
         let grid = CardGridInfo(items: items, windowSize: self.size)
         
-        let cardTypes = CardGenerator.shared.getNewCardNames(number: items / 2)
+        var cardTypes = CardGenerator.shared.getNewCardNames(number: items / 2)
         print(cardTypes)
-        
-        var cardInfos = [CardInfo]()
-        for cardType in cardTypes {
-            let cardInfo = CardInfo(name: cardType.name, face: CardGenerator.shared.getNewFaceImage(type: cardType, size: grid.cardSize))
-            cardInfos.append(cardInfo)
+        let cardTypes2 = cardTypes // copy the array
+        for cardType in cardTypes2 {
+            // use higher sequence numbers
+            var cardTypeCopy = cardType
+            cardTypeCopy.sequenceNumber += items / 2
+            cardTypes.append(cardTypeCopy)
         }
-        var deck = cardInfos + cardInfos // duplicate each card
-        deck.shuffle()
+        //cardTypes += cardTypes // duplicate each card
+    
+        cardTypes.shuffle() // make sure everyone has the same shuffle
         
-        let cardBack = CardGenerator.shared.drawCardBack(size: grid.cardSize)
-        
-        for r in (0 ..< grid.rows).reversed() { // backwards so missing cards are at bottom of screen
-            for c in 0 ..< grid.cols {
-                let card = CardNode(color: .red, size: grid.cardSize)
-                if let cardInfo = deck.popLast() {
-                    card.setup(info: cardInfo, back: cardBack)
-                    let move = SKAction.move(to: grid.position(row: r, col: c), duration: 1.5)
-                    card.position = CGPoint(x: -100, y: -100)
-                    card.run(move)
-                    cards.append(card)
-                    addChild(card)
-                }
-            }
-        }
+        isUserInteractionEnabled = false
         
         // now tell the clients about the cards too
-        sendGameToClients()
+        sendGameToClients(cards: cardTypes)
+        
+        setUpCards(cardTypes, grid)
+        pickPlayer()
+        
     }
     
-    func sendGameToClients() {
-        // send the cards as [CardInfo] to each client
-        var cardinfo = [String]()
-        for card in cards {
-            cardinfo.append(card.info.name)
-        }
+    func sendGameToClients(cards: [CardType]) {
+        // send the cards as [CardType] to each client
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(cardinfo) {
+        if let encoded = try? encoder.encode(cards) {
             
             guard let mcSession = SessionManager.shared.session else {
                 print("session is wonky")
@@ -86,7 +74,17 @@ class MultiplayerGameScene: SKScene {
         }
     }
     
+    func pickPlayer() {
+        let myTurn = SessionManager.shared.setupPlayers()
+        if myTurn {
+            isUserInteractionEnabled = true
+        }
+    }
+    
+
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         print("touched server game")
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let tappedNodes = nodes(at: location)
@@ -98,17 +96,17 @@ class MultiplayerGameScene: SKScene {
             }
             if cardSelected == nil {
                 cardSelected = tappedCard
-                tappedCard.revealCard() {}
+                tappedCard.revealCard(broadcast: true) {}
             }
             else if cardSelected!.name == tappedCard.name {
                 // a match! remove both cards
                 let otherCard = cardSelected
                 cardSelected = nil
-                tappedCard.revealCard() {
+                tappedCard.revealCard(broadcast: true) {
                     [weak self] in
                     // remove the nodes
-                    otherCard?.removeCard()
-                    tappedCard.removeCard()
+                    otherCard?.removeCard(broadcast: true)
+                    tappedCard.removeCard(broadcast: true)
                     
                     // then remove from the cards array
                     for (i, card) in ((self?.cards.enumerated().reversed())!) {
@@ -126,9 +124,13 @@ class MultiplayerGameScene: SKScene {
                 // not a match, turn both cards face down again
                 let otherCard = cardSelected
                 cardSelected = nil
-                tappedCard.revealCard() {
-                    tappedCard.concealCard()
-                    otherCard?.concealCard()
+                tappedCard.revealCard(broadcast: true) {
+                    [weak self] in
+                    tappedCard.concealCard(broadcast: true)
+                    otherCard?.concealCard(broadcast: true)
+                    // move to next player, if it's my turn let me tap
+                    self?.isUserInteractionEnabled = SessionManager.shared.newPlayer()
+                    
                 }
             }
         }

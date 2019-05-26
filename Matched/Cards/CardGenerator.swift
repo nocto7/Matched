@@ -18,14 +18,14 @@ class CardGenerator {
         let numbers = Array(1...4)
         // numoptions = 4*4*2
         var cardTypes = [CardType]()
-        for _ in 0..<items {
+        for i in 0..<items {
             var cardType: CardType
             repeat {
                 let shape = shapes.randomElement()!
                 let shade = shades.randomElement()!
                 let number = numbers.randomElement()!
                 let name = "\(shape)-\(shade)-\(number)"
-                cardType = CardType(name: name, shape: shape, shade: shade, number: number)
+                cardType = CardType(name: name, shape: shape, shade: shade, number: number, sequenceNumber: i)
             } while cardTypes.contains(where: { (ct) -> Bool in
                 let sameShape = (ct.shape == cardType.shape)
                 let sameNumber = (ct.number == cardType.number)

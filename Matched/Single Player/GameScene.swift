@@ -31,7 +31,7 @@ class GameScene: SKScene {
         
         var cardInfos = [CardInfo]()
         for cardType in cardTypes {
-            let cardInfo = CardInfo(name: cardType.name, face: CardGenerator.shared.getNewFaceImage(type: cardType, size: grid.cardSize))
+            let cardInfo = CardInfo(name: cardType.name, face: CardGenerator.shared.getNewFaceImage(type: cardType, size: grid.cardSize), sequenceNumber: cardType.sequenceNumber)
             cardInfos.append(cardInfo)
         }
         var deck = cardInfos + cardInfos // duplicate each card
@@ -66,17 +66,17 @@ class GameScene: SKScene {
             }
             if cardSelected == nil {
                 cardSelected = tappedCard
-                tappedCard.revealCard() {}
+                tappedCard.revealCard(broadcast: false) {}
             }
             else if cardSelected!.name == tappedCard.name {
                 // a match! remove both cards
                 let otherCard = cardSelected
                 cardSelected = nil
-                tappedCard.revealCard() {
+                tappedCard.revealCard(broadcast: false) {
                     [weak self] in
                     // remove the nodes
-                    otherCard?.removeCard()
-                    tappedCard.removeCard()
+                    otherCard?.removeCard(broadcast: false)
+                    tappedCard.removeCard(broadcast: false)
                     
                     // then remove from the cards array
                     for (i, card) in ((self?.cards.enumerated().reversed())!) {
@@ -94,9 +94,9 @@ class GameScene: SKScene {
                 // not a match, turn both cards face down again
                 let otherCard = cardSelected
                 cardSelected = nil
-                tappedCard.revealCard() {
-                    tappedCard.concealCard()
-                    otherCard?.concealCard()
+                tappedCard.revealCard(broadcast: false) {
+                    tappedCard.concealCard(broadcast: false)
+                    otherCard?.concealCard(broadcast: false)
                 }
             }
         }

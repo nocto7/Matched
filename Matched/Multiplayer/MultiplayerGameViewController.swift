@@ -12,6 +12,8 @@ import UIKit
 
 
 class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDelegate {
+    var scene: MultiplayerGameScene!
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
@@ -48,6 +50,19 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DispatchQueue.main.async { [weak self] in
             print("yay! we have data at the host: \(data) from \(peerID.displayName)")
+            
+            let message = String(decoding: data, as: UTF8.self)
+            print("server got the message: \(message)")
+            let stringBits = message.components(separatedBy: [" "])
+            if stringBits[0] == "reveal" {
+                self?.scene.revealCard(number: stringBits[1])
+            } else if stringBits[0] == "conceal" {
+                self?.scene.concealCard(number: stringBits[1])
+            } else if stringBits[0] == "remove" {
+                self?.scene.removeCard(number: stringBits[1])
+            } else if stringBits[0] == "endturn" {
+                self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
+            }
         }
     }
     
@@ -93,7 +108,8 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
             
             title = "Setting Up Matched Game"
             
-            let scene = MultiplayerGameScene(size: view.bounds.size)
+            // TODO hmmm, these are at the wrong size :(
+            scene = MultiplayerGameScene(size: view.bounds.size)
             scene.scaleMode = .resizeFill //.aspectFill
             view.presentScene(scene)
             

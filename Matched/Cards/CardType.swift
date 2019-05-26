@@ -8,9 +8,10 @@
 
 import Foundation
 
-struct CardType {
+struct CardType: Codable {
     var name: String
     var shape: String
     var shade: String
     var number: Int
+    var sequenceNumber: Int
 }

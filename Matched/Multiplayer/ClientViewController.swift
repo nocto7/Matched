@@ -41,8 +41,9 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
         title = "Multiplayer Matched Game"
         if let view = self.view as! SKView? {
             
-            title = "Setting Up Matched Game"
+            title = "Matched Game Client"
             
+            // TODO hmmm, these are at the wrong size :(
             scene = ClientGameScene(size: view.bounds.size)
             scene.scaleMode = .resizeFill //.aspectFill
             view.presentScene(scene)
@@ -109,10 +110,29 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
             print("yay! we have data at the client: \(data) from \(peerID.displayName)")
             
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([String].self, from: data) {
+            if let decoded = try? decoder.decode([CardType].self, from: data) {
                 print(decoded)
-                self?.scene.setCards(cardNames: decoded)
+                self?.scene.setCards(cardTypes: decoded)
+                return // give up once we've made sense of the message
             }
+            let message = String(decoding: data, as: UTF8.self)
+            print("client got the message: \(message)")
+            if message == "your turn" {
+                self?.scene.myTurn()
+                return
+            }
+            let stringBits = message.components(separatedBy: [" "])
+            if stringBits[0] == "reveal" {
+                self?.scene.revealCard(number: stringBits[1])
+            } else if stringBits[0] == "conceal" {
+                self?.scene.concealCard(number: stringBits[1])
+            } else if stringBits[0] == "remove" {
+                self?.scene.removeCard(number: stringBits[1])
+            } else if stringBits[0] == "endturn" {
+                self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
+            }
+            
+
         }
     }
 }
