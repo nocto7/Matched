@@ -13,10 +13,10 @@ class CardGenerator {
     static let shared = CardGenerator()
     
     func getNewCardNames(number items: Int) -> [CardType] {
-        let shapes = ["circle", "square", "triangle"]
+        let shapes = ["circle", "square", "triangle", "diamond"]
         let shades = ["pale","dark","diffpale","diffdark"]
         let numbers = Array(1...4)
-        // numoptions = 4*4*2
+        // numoptions = 4*4*4
         var cardTypes = [CardType]()
         for i in 0..<items {
             var cardType: CardType
@@ -49,7 +49,6 @@ class CardGenerator {
             
             ctx.cgContext.addPath(roundedRect.cgPath)
             ctx.cgContext.drawPath(using: .fillStroke)
-            
         }
         return img
     }
@@ -112,6 +111,12 @@ class CardGenerator {
                     ctx.cgContext.addLine(to: CGPoint(x: innerSquare.maxX, y: innerSquare.minY))
                     ctx.cgContext.addLine(to: CGPoint(x: innerSquare.midX, y: innerSquare.maxY))
                     ctx.cgContext.addLine(to: CGPoint(x: innerSquare.minX, y: innerSquare.minY))
+                } else if type.shape == "diamond" {
+                    ctx.cgContext.move(to: CGPoint(x: innerSquare.midX, y: innerSquare.minY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.maxX, y: innerSquare.midY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.midX, y: innerSquare.maxY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.minX, y: innerSquare.midY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.midX, y: innerSquare.minY))
                 }
             }
             ctx.cgContext.drawPath(using: .fillStroke)

@@ -9,6 +9,8 @@
 import SpriteKit
 import GameplayKit
 
+// this needs to be a BaseGameScene too
+
 class GameScene: SKScene {
     var cards = [CardNode]()
     var cardSelected: CardNode?
@@ -106,7 +108,7 @@ class GameScene: SKScene {
         print("number of cards left: \(cards.count)")
         if cards.count == 0 {
             level += 1
-            let items = min((level + 1) * 4, 32) // 4*4*2 card variations at the mo, limits the game
+            let items = min((level + 1) * 4, 64) // 4*4*4 card variations at the mo, limits the game
             level(items: items )
         }
     }
