@@ -13,7 +13,7 @@ class CardGenerator {
     static let shared = CardGenerator()
     
     func getNewCardNames(number items: Int) -> [CardType] {
-        let shapes = ["circle", "square"]
+        let shapes = ["circle", "square", "triangle"]
         let shades = ["pale","dark","diffpale","diffdark"]
         let numbers = Array(1...4)
         // numoptions = 4*4*2
@@ -106,6 +106,12 @@ class CardGenerator {
                     ctx.cgContext.addEllipse(in: innerSquare)
                 } else if type.shape == "square" {
                     ctx.cgContext.addRect(innerSquare)
+                }
+                else if type.shape == "triangle" {
+                    ctx.cgContext.move(to: CGPoint(x: innerSquare.minX, y: innerSquare.minY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.maxX, y: innerSquare.minY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.midX, y: innerSquare.maxY))
+                    ctx.cgContext.addLine(to: CGPoint(x: innerSquare.minX, y: innerSquare.minY))
                 }
             }
             ctx.cgContext.drawPath(using: .fillStroke)
