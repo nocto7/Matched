@@ -7,10 +7,12 @@
 //
 
 import MultipeerConnectivity
+import SpriteKit
 import UIKit
 
 class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
     weak var coordinator: MainCoordinator?
+    var scene: ClientGameScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,18 +23,34 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
         
         SessionManager.shared.session.delegate = self
         
-       // startGame()
+        // startGame()
         
-       // navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
+        // navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
         //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
     }
     
-    @objc func showConnectionPrompt() {
-        coordinator?.connectToGame()
+//    @objc func showConnectionPrompt() {
+//        coordinator?.connectToGame()
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        startGame()
     }
     
     fileprivate func startGame() {
-        title = "Multiplayer Matched Game Client"
+        title = "Multiplayer Matched Game"
+        if let view = self.view as! SKView? {
+            
+            title = "Setting Up Matched Game"
+            
+            scene = ClientGameScene(size: view.bounds.size)
+            scene.scaleMode = .resizeFill //.aspectFill
+            view.presentScene(scene)
+            
+            view.ignoresSiblingOrder = true
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
     }
     
     @IBAction func seeWho(_ sender: Any) {
@@ -89,6 +107,12 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DispatchQueue.main.async { [weak self] in
             print("yay! we have data at the client: \(data) from \(peerID.displayName)")
+            
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([String].self, from: data) {
+                print(decoded)
+                self?.scene.setCards(cardNames: decoded)
+            }
         }
     }
 }

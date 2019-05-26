@@ -26,19 +26,19 @@ class ConnectionViewController: UIViewController, Storyboarded, MCBrowserViewCon
     
     @IBAction func startHostingGame(_ sender: Any) {
         guard let mcSession = mcSession else { return }
-        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "nocto-matched", discoveryInfo: nil, session: mcSession)
-        mcAdvertiserAssistant?.start()
+        let mcBrowser = MCBrowserViewController(serviceType: "nocto-matched", session: mcSession)
+        mcBrowser.delegate = self
+        present(mcBrowser, animated: true)
         print("hosting")
         SessionManager.shared.setup(session: mcSession)
-        coordinator?.hostMultiplayerGame()
+        
     }
     
    
     @IBAction func joinGame(_ sender: Any) {
         guard let mcSession = mcSession else { return }
-        let mcBrowser = MCBrowserViewController(serviceType: "nocto-matched", session: mcSession)
-        mcBrowser.delegate = self
-        present(mcBrowser, animated: true)
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "nocto-matched", discoveryInfo: nil, session: mcSession)
+        mcAdvertiserAssistant?.start()
         print("joining")
         SessionManager.shared.setup(session: mcSession)
         coordinator?.multiplayerGameClient()
@@ -48,8 +48,8 @@ class ConnectionViewController: UIViewController, Storyboarded, MCBrowserViewCon
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         print("browser view finished")
         dismiss(animated: true)
-
-       
+        // start hosting the game when the players are invited
+        coordinator?.hostMultiplayerGame()
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {

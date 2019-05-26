@@ -65,7 +65,7 @@
         <scene sceneID="waZ-Vk-AkS">
             <objects>
                 <viewController storyboardIdentifier="MultiplayerGameViewController" id="unJ-om-LT9" customClass="MultiplayerGameViewController" customModule="Matched" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uH7-ge-QEw">
+                    <view key="view" contentMode="scaleToFill" id="uH7-ge-QEw" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -90,7 +90,7 @@
         <scene sceneID="Ywe-Sh-ldN">
             <objects>
                 <viewController storyboardIdentifier="ClientViewController" id="8eG-kV-szY" customClass="ClientViewController" customModule="Matched" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0i6-gb-dkZ">
+                    <view key="view" contentMode="scaleToFill" id="0i6-gb-dkZ" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

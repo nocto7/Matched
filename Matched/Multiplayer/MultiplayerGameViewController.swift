@@ -51,22 +51,22 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
         }
     }
     
-        weak var coordinator: MainCoordinator?
+    weak var coordinator: MainCoordinator?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            print("frame: \(view.frame)")
-            print("bounds: \(view.bounds)")
-            print(view.subviews)
-            
-            SessionManager.shared.session.delegate = self
-            
-            
-//            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restart))
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
-        }
+        print("frame: \(view.frame)")
+        print("bounds: \(view.bounds)")
+        print(view.subviews)
         
+        SessionManager.shared.session.delegate = self
+        
+        
+        //            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restart))
+        //            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+    }
+    
     @IBAction func seeWho(_ sender: Any) {
         
         guard let mcSession = SessionManager.shared.session else {
@@ -86,42 +86,41 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
         }
     }
     
-        
-        fileprivate func startGame() {
-            title = "Multiplayer Matched Game"
-//            if let view = self.view as! SKView? {
-//                
-//                
-//                
-////                let scene = GameScene(size: view.bounds.size)
-////                scene.scaleMode = .resizeFill //.aspectFill
-////                view.presentScene(scene)
-////
-////                view.ignoresSiblingOrder = true
-////                view.showsFPS = true
-////                view.showsNodeCount = true
-//            }
-        }
-        
-        override func viewWillAppear(_ animated: Bool) {
+    
+    fileprivate func startGame() {
+        title = "Multiplayer Matched Game"
+        if let view = self.view as! SKView? {
             
-            startGame()
+            title = "Setting Up Matched Game"
+            
+            let scene = MultiplayerGameScene(size: view.bounds.size)
+            scene.scaleMode = .resizeFill //.aspectFill
+            view.presentScene(scene)
+            
+            view.ignoresSiblingOrder = true
+            view.showsFPS = true
+            view.showsNodeCount = true
         }
-        
-        override var shouldAutorotate: Bool {
-            return false
-        }
-        
-        override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-            return .allButUpsideDown
-        }
-        
-        override var prefersStatusBarHidden: Bool {
-            return true
-        }
-        
-        @objc func restart() {
-            startGame()
-        }
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        startGame()
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .allButUpsideDown
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    @objc func restart() {
+        startGame()
+    }
+    
 }
