@@ -36,30 +36,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zeq-FM-abW">
-                                <rect key="frame" x="163" y="201" width="89" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Host a Game"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zeq-FM-abW">
+                                <rect key="frame" x="20" y="44" width="374" height="48"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <state key="normal" title="Host a Game">
+                                    <color key="titleColor" name="MyPurplePalest"/>
+                                    <color key="titleShadowColor" name="MyPurpleDarkest"/>
+                                </state>
                                 <connections>
                                     <action selector="startHostingGame:" destination="OFQ-2h-x0J" eventType="touchUpInside" id="yur-WO-G3N"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9L-03-gaF">
-                                <rect key="frame" x="120" y="273" width="132" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Connect to a Game"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9L-03-gaF">
+                                <rect key="frame" x="20" y="100" width="374" height="48"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <state key="normal" title="Connect to a Game">
+                                    <color key="titleColor" name="MyPurplePalest"/>
+                                    <color key="titleShadowColor" name="MyPurpleDarkest"/>
+                                </state>
                                 <connections>
                                     <action selector="joinGame:" destination="OFQ-2h-x0J" eventType="touchUpInside" id="xWf-N8-BCO"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="MyPurple"/>
+                        <constraints>
+                            <constraint firstItem="P9L-03-gaF" firstAttribute="top" secondItem="Zeq-FM-abW" secondAttribute="bottom" constant="8" symbolic="YES" id="GRv-p8-AJ9"/>
+                            <constraint firstItem="Zeq-FM-abW" firstAttribute="leading" secondItem="Tzq-mc-h25" secondAttribute="leadingMargin" id="JVl-cr-BHQ"/>
+                            <constraint firstItem="Zeq-FM-abW" firstAttribute="trailing" secondItem="P9L-03-gaF" secondAttribute="trailing" id="Nac-Vr-gSf"/>
+                            <constraint firstItem="Zeq-FM-abW" firstAttribute="top" secondItem="Rhn-24-O5g" secondAttribute="top" id="aC5-vP-CEC"/>
+                            <constraint firstItem="Zeq-FM-abW" firstAttribute="leading" secondItem="P9L-03-gaF" secondAttribute="leading" id="j0K-Ae-7xe"/>
+                            <constraint firstItem="Zeq-FM-abW" firstAttribute="trailing" secondItem="Tzq-mc-h25" secondAttribute="trailingMargin" id="syn-GB-ggj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Rhn-24-O5g"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ejy-fh-woU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3467" y="750"/>
+            <point key="canvasLocation" x="3466.666666666667" y="750"/>
         </scene>
         <!--Multiplayer Game View Controller-->
         <scene sceneID="waZ-Vk-AkS">
@@ -70,9 +84,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apI-vl-mGC">
-                                <rect key="frame" x="153" y="215" width="109" height="30"/>
+                                <rect key="frame" x="20" y="832" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="See who is here"/>
+                                <state key="normal" title="See who is here">
+                                    <color key="titleColor" name="MyYellowPalest"/>
+                                </state>
                                 <connections>
                                     <action selector="seeWho:" destination="unJ-om-LT9" eventType="touchUpInside" id="E8g-Mk-lE5"/>
                                 </connections>
@@ -95,9 +111,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-By-qfc">
-                                <rect key="frame" x="132" y="209" width="109" height="30"/>
+                                <rect key="frame" x="20" y="832" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="See who is here"/>
+                                <state key="normal" title="See who is here">
+                                    <color key="titleColor" name="MyPinkPalest"/>
+                                </state>
                                 <connections>
                                     <action selector="seeWho:" destination="8eG-kV-szY" eventType="touchUpInside" id="72e-hm-Neq"/>
                                 </connections>
@@ -131,8 +149,23 @@
         <namedColor name="MyPinkDark">
             <color red="0.68627450980392157" green="0.2627450980392157" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="MyPinkPalest">
+            <color red="0.9137254901960784" green="0.65490196078431373" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MyPurple">
+            <color red="0.46274509803921571" green="0.33725490196078434" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MyPurpleDarkest">
+            <color red="0.28627450980392155" green="0.16862745098039217" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MyPurplePalest">
+            <color red="0.70196078431372544" green="0.61568627450980395" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="MyYellowDarkest">
             <color red="0.68235294117647061" green="0.63529411764705879" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MyYellowPalest">
+            <color red="1" green="0.97254901960784312" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
