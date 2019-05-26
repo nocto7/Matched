@@ -75,17 +75,16 @@
             </objects>
             <point key="canvasLocation" x="3466.666666666667" y="750"/>
         </scene>
-        <!--Multiplayer Game View Controller-->
+        <!--Host-->
         <scene sceneID="waZ-Vk-AkS">
             <objects>
-                <viewController storyboardIdentifier="MultiplayerGameViewController" id="unJ-om-LT9" customClass="MultiplayerGameViewController" customModule="Matched" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MultiplayerGameViewController" title="Host" id="unJ-om-LT9" customClass="MultiplayerGameViewController" customModule="Matched" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uH7-ge-QEw" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apI-vl-mGC">
-                                <rect key="frame" x="20" y="832" width="109" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apI-vl-mGC">
+                                <rect key="frame" x="20" y="832" width="374" height="30"/>
                                 <state key="normal" title="See who is here">
                                     <color key="titleColor" name="MyYellowPalest"/>
                                 </state>
@@ -95,24 +94,29 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" name="MyYellowDarkest"/>
+                        <constraints>
+                            <constraint firstItem="apI-vl-mGC" firstAttribute="bottom" secondItem="dfD-ib-hPB" secondAttribute="bottom" id="Jpi-Dg-Bej"/>
+                            <constraint firstItem="apI-vl-mGC" firstAttribute="leading" secondItem="uH7-ge-QEw" secondAttribute="leadingMargin" id="Kw3-ov-LHf"/>
+                            <constraint firstItem="apI-vl-mGC" firstAttribute="trailing" secondItem="uH7-ge-QEw" secondAttribute="trailingMargin" id="ct6-VA-INH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dfD-ib-hPB"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9se-8l-FpV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4125" y="748"/>
+            <point key="canvasLocation" x="4124.6376811594209" y="747.99107142857144"/>
         </scene>
-        <!--Client View Controller-->
+        <!--Client-->
         <scene sceneID="Ywe-Sh-ldN">
             <objects>
-                <viewController storyboardIdentifier="ClientViewController" id="8eG-kV-szY" customClass="ClientViewController" customModule="Matched" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClientViewController" title="Client" id="8eG-kV-szY" customClass="ClientViewController" customModule="Matched" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0i6-gb-dkZ" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-By-qfc">
-                                <rect key="frame" x="20" y="832" width="109" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-By-qfc">
+                                <rect key="frame" x="20" y="832" width="374" height="30"/>
                                 <state key="normal" title="See who is here">
                                     <color key="titleColor" name="MyPinkPalest"/>
                                 </state>
@@ -122,12 +126,18 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" name="MyPinkDark"/>
+                        <constraints>
+                            <constraint firstItem="Kug-By-qfc" firstAttribute="bottom" secondItem="8Cv-bh-cyH" secondAttribute="bottom" id="5Y1-6M-41M"/>
+                            <constraint firstItem="Kug-By-qfc" firstAttribute="trailing" secondItem="0i6-gb-dkZ" secondAttribute="trailingMargin" id="9XI-TQ-ElI"/>
+                            <constraint firstItem="Kug-By-qfc" firstAttribute="leading" secondItem="0i6-gb-dkZ" secondAttribute="leadingMargin" id="q2L-FH-qNg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8Cv-bh-cyH"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4J6-gs-asq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4846" y="741"/>
+            <point key="canvasLocation" x="4844.927536231884" y="740.625"/>
         </scene>
         <!--My Navigation Controller-->
         <scene sceneID="kJh-DH-HPL">
