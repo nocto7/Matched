@@ -14,6 +14,8 @@ class MultiplayerGameScene: BaseGameScene {
     var level = 3 // start multiplayer game at higher level
     
     override func didMove(to view: SKView) {
+        playerState = PlayerState(mode: .multi, status: .unknown, role: .server)
+        
         let items = (level + 1) * 4
         level(items: items)
     }
@@ -75,71 +77,16 @@ class MultiplayerGameScene: BaseGameScene {
     func pickPlayer() {
         let myTurn = SessionManager.shared.setupPlayers()
         if myTurn {
-            isUserInteractionEnabled = true
+            makeActivePlayer()
+        } else {
+            makeInactivePlayer()
         }
     }
     
 
+
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-         print("touched server game")
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        let tappedNodes = nodes(at: location)
-        if let tappedCard = tappedNodes.first as? CardNode {
-            print("touched game: \(String(describing: tappedCard.info))")
-            if (tappedCard == cardSelected) {
-                // tapping on same card twice does nothing
-                return
-            }
-            if cardSelected == nil {
-                cardSelected = tappedCard
-                tappedCard.revealCard(broadcast: true) {}
-            }
-            else if cardSelected!.name == tappedCard.name {
-                // a match! remove both cards
-                let otherCard = cardSelected
-                cardSelected = nil
-                tappedCard.revealCard(broadcast: true) {
-                    [weak self] in
-                    // remove the nodes
-                    otherCard?.removeCard(broadcast: true)
-                    tappedCard.removeCard(broadcast: true)
-                    
-                    // then remove from the cards array
-                    for (i, card) in ((self?.cards.enumerated().reversed())!) {
-                        if otherCard == card {
-                            self?.cards.remove(at: i)
-                        }
-                        if tappedCard == card {
-                            self?.cards.remove(at: i)
-                        }
-                    }
-                    self?.isGameFinished()
-                }
-                
-            } else {
-                // not a match, turn both cards face down again
-                let otherCard = cardSelected
-                cardSelected = nil
-                tappedCard.revealCard(broadcast: true) {
-                    [weak self] in
-                    tappedCard.concealCard(broadcast: true)
-                    otherCard?.concealCard(broadcast: true)
-                    // move to next player, if it's my turn let me tap
-                    self?.isUserInteractionEnabled = SessionManager.shared.newPlayer()
-                    
-                }
-            }
-        }
-    }
+ 
     
-    func isGameFinished() {
-        print("number of cards left: \(cards.count)")
-        if cards.count == 0 {
-            level += 1
-            let items = min((level + 1) * 4, 32) // 4*4*2 card variations at the mo, limits the game
-            level(items: items )
-        }
-    }
+
 }

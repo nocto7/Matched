@@ -30,6 +30,28 @@ class SessionManager {
         return activatePlayer(currentPlayer)
     }
     
+    // these functions need to manipulate states? or not be here?
+    
+    // move on to the next player, return correct status to this player
+    func nextPlayer(myState: PlayerState?) -> PlayerState? {
+        guard let state = myState else { return nil }
+        switch state.role {
+        case .some(.client):
+            print("we're a client! we ought to tell the server we need the next player")
+            return state
+        case .some(.server):
+             print("we're a server")
+        case .none:
+            print("we're not anything!")
+            return state
+        }
+        if newPlayer() {
+            return PlayerState(mode: state.mode, status: .current, role: state.role)
+        } else {
+            return PlayerState(mode: state.mode, status: .waiting, role: state.role)
+        }
+    }
+    
     // returns value is whether this server is the current player
     func newPlayer() -> Bool {
         currentPlayer += 1

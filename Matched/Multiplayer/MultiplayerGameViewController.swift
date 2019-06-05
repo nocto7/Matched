@@ -61,7 +61,8 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
             } else if stringBits[0] == "remove" {
                 self?.scene.removeCard(number: stringBits[1])
             } else if stringBits[0] == "endturn" {
-                self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
+                self?.scene?.nextPlayer()
+                //self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
             }
         }
     }
@@ -99,6 +100,7 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
                 print("message not sent properly from host")
             }
         }
+         print("server has state: \(scene.playerState)")
     }
     
     

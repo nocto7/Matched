@@ -14,6 +14,8 @@ class GameScene: BaseGameScene {
     var level = 1
     
     override func didMove(to view: SKView) {
+        playerState = PlayerState(mode: .single, status: .current, role: nil)
+        
         let items = 4
         level(items: items)
     }
@@ -40,56 +42,10 @@ class GameScene: BaseGameScene {
         setUpCards(cardTypes, grid)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        let tappedNodes = nodes(at: location)
-        if let tappedCard = tappedNodes.first as? CardNode {
-            print("touched game: \(String(describing: tappedCard.info))")
-            if (tappedCard == cardSelected) {
-                // tapping on same card twice does nothing
-                return
-            }
-            if cardSelected == nil {
-                cardSelected = tappedCard
-                tappedCard.revealCard(broadcast: false) {}
-            }
-            else if cardSelected!.name == tappedCard.name {
-                // a match! remove both cards
-                let otherCard = cardSelected
-                cardSelected = nil
-                tappedCard.revealCard(broadcast: false) {
-                    [weak self] in
-                    // remove the nodes
-                    otherCard?.removeCard(broadcast: false)
-                    tappedCard.removeCard(broadcast: false)
-                    
-                    // then remove from the cards array
-                    for (i, card) in ((self?.cards.enumerated().reversed())!) {
-                        if otherCard == card {
-                            self?.cards.remove(at: i)
-                        }
-                        if tappedCard == card {
-                            self?.cards.remove(at: i)
-                        }
-                    }
-                    self?.isGameFinished()
-                }
-                
-            } else {
-                // not a match, turn both cards face down again
-                let otherCard = cardSelected
-                cardSelected = nil
-                tappedCard.revealCard(broadcast: false) {
-                    tappedCard.concealCard(broadcast: false)
-                    otherCard?.concealCard(broadcast: false)
-                }
-            }
-        }
-    }
+  
     
-    func isGameFinished() {
-        print("number of cards left: \(cards.count)")
+    override func isGameFinished() {
+        print("[single player] number of cards left: \(cards.count)")
         if cards.count == 0 {
             level += 1
             let items = min((level + 1) * 4, 64) // 4*4*4 card variations at the mo, limits the game

@@ -8,9 +8,26 @@
 
 import Foundation
 
-enum PlayerState {
-    case singlePlayer
-    case currentPlayer
-    case waitingPlayer
+struct PlayerState {
+    let mode: PlayMode // single/multi
+    let status: PlayerStatus // current/waiting
+    let role: HostRole? // server/client (not set for single player)
 }
+
+enum PlayMode {
+    case single
+    case multi
+}
+
+enum PlayerStatus {
+    case current
+    case waiting
+    case unknown
+}
+
+enum HostRole {
+    case server
+    case client
+}
+
 

@@ -70,6 +70,7 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
                 print("message not sent properly from client")
             }
         }
+        print("client has state: \(scene.playerState)")
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -118,7 +119,7 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
             let message = String(decoding: data, as: UTF8.self)
             print("client got the message: \(message)")
             if message == "your turn" {
-                self?.scene.myTurn()
+                self?.scene.makeActivePlayer()
                 return
             }
             let stringBits = message.components(separatedBy: [" "])
@@ -129,7 +130,8 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
             } else if stringBits[0] == "remove" {
                 self?.scene.removeCard(number: stringBits[1])
             } else if stringBits[0] == "endturn" {
-                self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
+                self?.scene.makeInactivePlayer()
+                //self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
             }
             
 
