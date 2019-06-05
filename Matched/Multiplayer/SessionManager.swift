@@ -40,7 +40,7 @@ class SessionManager {
         
     }
     
-    // returns value is whether this server is the current player
+    // return value is whether this server is the current player
     func activatePlayer(_ playerNumber: Int) -> Bool {
         if currentPlayer == numPlayers {
             print("i'm the current player")

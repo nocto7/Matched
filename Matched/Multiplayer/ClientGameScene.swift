@@ -8,8 +8,6 @@
 
 import MultipeerConnectivity
 import SpriteKit
-import GameplayKit
-
 
 class ClientGameScene: BaseGameScene {
   

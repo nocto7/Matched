@@ -30,6 +30,7 @@
 		47DFAD452296D856006410B9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD442296D856006410B9 /* Coordinator.swift */; };
 		47DFAD472296D8A6006410B9 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD462296D8A6006410B9 /* Storyboarded.swift */; };
 		47DFAD492296D987006410B9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFAD482296D987006410B9 /* MainCoordinator.swift */; };
+		47E1B65D22A6703700EAC076 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1B65C22A6703700EAC076 /* PlayerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		47DFAD442296D856006410B9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		47DFAD462296D8A6006410B9 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		47DFAD482296D987006410B9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		47E1B65C22A6703700EAC076 /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				47266F4F229AA96600B52274 /* MultiplayerGameScene.swift */,
 				479E9BB42299936F000CF29A /* MultiplayerGameViewController.swift */,
 				479E9BB82299AEB3000CF29A /* SessionManager.swift */,
+				47E1B65C22A6703700EAC076 /* PlayerState.swift */,
 			);
 			path = Multiplayer;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				47266F52229AC3CB00B52274 /* ClientGameScene.swift in Sources */,
 				47080B652295B12100166675 /* MyNavigationController.swift in Sources */,
 				47080B052293FB7B00166675 /* AppDelegate.swift in Sources */,
+				47E1B65D22A6703700EAC076 /* PlayerState.swift in Sources */,
 				479E9BAF229951CE000CF29A /* CardInfo.swift in Sources */,
 				479E9BB322998970000CF29A /* ConnectionViewController.swift in Sources */,
 				479E9BAB2299322F000CF29A /* CardGridInfo.swift in Sources */,

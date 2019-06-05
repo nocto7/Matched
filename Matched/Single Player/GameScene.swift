@@ -7,13 +7,10 @@
 //
 
 import SpriteKit
-import GameplayKit
 
 // this needs to be a BaseGameScene too
 
-class GameScene: SKScene {
-    var cards = [CardNode]()
-    var cardSelected: CardNode?
+class GameScene: BaseGameScene {
     var level = 1
     
     override func didMove(to view: SKView) {
@@ -27,33 +24,20 @@ class GameScene: SKScene {
         run(SKAction.colorize(with: UIColor(cgColor: ColourManager.shared.palest), colorBlendFactor: 1.0, duration: 1.5))
         
         let grid = CardGridInfo(items: items, windowSize: self.size)
-        
-        let cardTypes = CardGenerator.shared.getNewCardNames(number: items / 2)
+
+        var cardTypes = CardGenerator.shared.getNewCardNames(number: items / 2)
         print(cardTypes)
-        
-        var cardInfos = [CardInfo]()
-        for cardType in cardTypes {
-            let cardInfo = CardInfo(name: cardType.name, face: CardGenerator.shared.getNewFaceImage(type: cardType, size: grid.cardSize), sequenceNumber: cardType.sequenceNumber)
-            cardInfos.append(cardInfo)
+        let cardTypes2 = cardTypes // copy the array
+        for cardType in cardTypes2 {
+            // use higher sequence numbers
+            var cardTypeCopy = cardType
+            cardTypeCopy.sequenceNumber += items / 2
+            cardTypes.append(cardTypeCopy)
         }
-        var deck = cardInfos + cardInfos // duplicate each card
-        deck.shuffle()
         
-        let cardBack = CardGenerator.shared.drawCardBack(size: grid.cardSize)
+        cardTypes.shuffle()
         
-        for r in (0 ..< grid.rows).reversed() { // backwards so missing cards are at bottom of screen
-            for c in 0 ..< grid.cols {
-                let card = CardNode(color: .red, size: grid.cardSize)
-                if let cardInfo = deck.popLast() {
-                    card.setup(info: cardInfo, back: cardBack)
-                    let move = SKAction.move(to: grid.position(row: r, col: c), duration: 1.5)
-                    card.position = CGPoint(x: -100, y: -100)
-                    card.run(move)
-                    cards.append(card)
-                    addChild(card)
-                }
-            }
-        }
+        setUpCards(cardTypes, grid)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
