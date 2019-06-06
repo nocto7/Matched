@@ -20,7 +20,6 @@ class MultiplayerGameScene: BaseGameScene {
         level(items: items)
     }
     
-    
     func level(items: Int) {
         ColourManager.shared.changeColour()
         // this animates changing the background colour
@@ -41,37 +40,15 @@ class MultiplayerGameScene: BaseGameScene {
     
         cardTypes.shuffle() // make sure everyone has the same shuffle
         
-        isUserInteractionEnabled = false
+        makeInactivePlayer()
         
         // now tell the clients about the cards too
-        sendGameToClients(cards: cardTypes)
+        //sendGameToClients(cards: cardTypes)
+        SessionManager.shared.shareGame(cards: cardTypes)
         
         setUpCards(cardTypes, grid)
         pickPlayer()
         
-    }
-    
-    func sendGameToClients(cards: [CardType]) {
-        // send the cards as [CardType] to each client
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(cards) {
-            
-            guard let mcSession = SessionManager.shared.session else {
-                print("session is wonky")
-                return
-            }
-            print("session is ok!")
-            print("there are \(mcSession.connectedPeers.count) connected peers")
-            if mcSession.connectedPeers.count > 0 {
-                print ("someone to play with!")
-                //let data = Data("message from host".utf8)
-                do {
-                    try mcSession.send(encoded, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch {
-                    print("message not sent properly from host")
-                }
-            }
-        }
     }
     
     func pickPlayer() {

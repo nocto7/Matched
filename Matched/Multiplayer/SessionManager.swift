@@ -94,4 +94,48 @@ class SessionManager {
             print("message not sent properly from host")
         }
     }
+    
+    // used by the server to send the game setup to each client
+    func shareGame(cards: [CardType]) {
+        let message = GameMessage.setup(cards: cards)
+        // send the cards as [CardType] to each client
+        let encoder = JSONEncoder()
+        if let encodedGame = try? encoder.encode(message) {
+            guard let mcSession = SessionManager.shared.session else {
+                print("session is wonky")
+                return
+            }
+            print("session is ok!")
+            print("there are \(mcSession.connectedPeers.count) connected peers")
+            if mcSession.connectedPeers.count > 0 {
+                print ("someone to play with!")
+                //let data = Data("message from host".utf8)
+                do {
+                    try mcSession.send(encodedGame, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch {
+                    print("message not sent properly from host")
+                }
+            }
+        }
+        
+        // old version
+        if let encoded = try? encoder.encode(cards) {
+            
+            guard let mcSession = SessionManager.shared.session else {
+                print("session is wonky")
+                return
+            }
+            print("session is ok!")
+            print("there are \(mcSession.connectedPeers.count) connected peers")
+            if mcSession.connectedPeers.count > 0 {
+                print ("someone to play with!")
+                //let data = Data("message from host".utf8)
+                do {
+                    try mcSession.send(encoded, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch {
+                    print("message not sent properly from host")
+                }
+            }
+        }
+    }
 }

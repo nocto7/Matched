@@ -111,11 +111,24 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
             print("yay! we have data at the client: \(data) from \(peerID.displayName)")
             
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([CardType].self, from: data) {
-                print(decoded)
-                self?.scene.setCards(cardTypes: decoded)
-                return // give up once we've made sense of the message
+            if let gameMessage = try? decoder.decode(GameMessage.self, from: data) {
+                print ("we have received a GameMessage! \(gameMessage)")
+                switch gameMessage {
+                case .setup(let cards):
+                    print("we have a game setup with \(cards.count) cards")
+                    self?.scene.setCards(cardTypes: cards)
+                    return
+                    
+                default:
+                    print("we received some other sort of game message")
+                }
             }
+            
+//            if let decoded = try? decoder.decode([CardType].self, from: data) {
+//                print(decoded)
+//                self?.scene.setCards(cardTypes: decoded)
+//                return // give up once we've made sense of the message
+//            }
             let message = String(decoding: data, as: UTF8.self)
             print("client got the message: \(message)")
             if message == "your turn" {
@@ -131,7 +144,6 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
                 self?.scene.removeCard(number: stringBits[1])
             } else if stringBits[0] == "endturn" {
                 self?.scene.makeInactivePlayer()
-                //self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
             }
             
 

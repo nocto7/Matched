@@ -83,6 +83,7 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
         //            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
     }
     
+    // this is just a debugging thing
     @IBAction func seeWho(_ sender: Any) {
         
         guard let mcSession = SessionManager.shared.session else {

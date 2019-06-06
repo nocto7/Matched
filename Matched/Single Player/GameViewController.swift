@@ -44,7 +44,6 @@ class GameViewController: UIViewController, Storyboarded {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         startGame()
     }
     
@@ -54,11 +53,6 @@ class GameViewController: UIViewController, Storyboarded {
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .allButUpsideDown
-//        if UIDevice.current.userInterfaceIdiom == .phone {
-//            return .allButUpsideDown
-//        } else {
-//            return .all
-//        }
     }
     
     override var prefersStatusBarHidden: Bool {
