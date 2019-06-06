@@ -24,5 +24,4 @@ class ClientGameScene: BaseGameScene {
         setUpCards(cardTypes, grid)
     }
     
-
 }

@@ -41,7 +41,7 @@ class CardNode: SKSpriteNode {
    
     func revealCard(broadcast: Bool, completion: @escaping () -> Void) {
         if broadcast {
-            SessionManager.shared.broadcastMessage(message: "reveal \(info.sequenceNumber)")
+            SessionManager.shared.revealCard(card: info.sequenceNumber)
         }
         let flip1 = SKAction.scaleX(to: 0, duration: 0.5)
         let face = SKAction.setTexture(SKTexture(image: faceImage))
@@ -54,7 +54,7 @@ class CardNode: SKSpriteNode {
     
     func concealCard(broadcast: Bool) {
         if broadcast {
-            SessionManager.shared.broadcastMessage(message: "conceal \(info.sequenceNumber)")
+            SessionManager.shared.concealCard(card: info.sequenceNumber)
         }
         let flip1 = SKAction.scaleX(to: 0, duration: 0.5)
         let face = SKAction.setTexture(SKTexture(image: backImage))
@@ -65,7 +65,7 @@ class CardNode: SKSpriteNode {
     
     func removeCard(broadcast: Bool) {
         if broadcast {
-            SessionManager.shared.broadcastMessage(message: "remove \(info.sequenceNumber)")
+            SessionManager.shared.removeCard(card: info.sequenceNumber)
         }
         let vanish = SKAction.scale(to: 0, duration: 1.0)
         let remove = SKAction.removeFromParent()

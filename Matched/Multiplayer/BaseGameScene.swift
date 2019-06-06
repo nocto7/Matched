@@ -39,10 +39,9 @@ class BaseGameScene: SKScene {
     }
     
     // used when other clients show a card
-    func revealCard(number: String) {
-        guard let num = Int(number) else { return }
+    func revealCard(number: Int) {
         for card in cards {
-            if card.info.sequenceNumber == num {
+            if card.info.sequenceNumber == number {
                 card.revealCard(broadcast: false) {
                     // do nowt
                 }
@@ -51,20 +50,18 @@ class BaseGameScene: SKScene {
     }
     
     // used when other clients conceal a card
-    func concealCard(number: String) {
-        guard let num = Int(number) else { return }
+    func concealCard(number: Int) {
         for card in cards {
-            if card.info.sequenceNumber == num {
+            if card.info.sequenceNumber == number {
                 card.concealCard(broadcast: false)
             }
         }
     }
     
     // used when other clients show a card
-    func removeCard(number: String) {
-        guard let num = Int(number) else { return }
+    func removeCard(number: Int) {
         for card in cards {
-            if card.info.sequenceNumber == num {
+            if card.info.sequenceNumber == number {
                 card.removeCard(broadcast: false) 
             }
         }
@@ -146,7 +143,7 @@ class BaseGameScene: SKScene {
         
         // client
         if playerState.role == .client {
-            SessionManager.shared.broadcastMessage(message: "endturn")
+            SessionManager.shared.endTurn()
             makeInactivePlayer()
             return
         }

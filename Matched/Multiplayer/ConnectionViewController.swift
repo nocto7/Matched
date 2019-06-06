@@ -56,9 +56,5 @@ class ConnectionViewController: UIViewController, Storyboarded, MCBrowserViewCon
         dismiss(animated: true)
         print("browser view cancelled")
     }
-    
-
-
-
 
 }

@@ -43,7 +43,6 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
             
             title = "Matched Game Client"
             
-            // TODO hmmm, these are at the wrong size :(
             scene = ClientGameScene(size: view.bounds.size)
             scene.scaleMode = .resizeFill //.aspectFill
             view.presentScene(scene)
@@ -105,48 +104,32 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
         
     }
     
-    
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DispatchQueue.main.async { [weak self] in
-            print("yay! we have data at the client: \(data) from \(peerID.displayName)")
-            
             let decoder = JSONDecoder()
             if let gameMessage = try? decoder.decode(GameMessage.self, from: data) {
                 print ("we have received a GameMessage! \(gameMessage)")
                 switch gameMessage {
                 case .setup(let cards):
-                    print("we have a game setup with \(cards.count) cards")
                     self?.scene.setCards(cardTypes: cards)
                     return
-                    
-                default:
-                    print("we received some other sort of game message")
+                case .reveal(let card):
+                    self?.scene.revealCard(number: card)
+                    return
+                case .conceal(let card):
+                    self?.scene.concealCard(number: card)
+                    return
+                case .remove(let card):
+                    self?.scene.removeCard(number: card)
+                    return
+                case .endturn:
+                    self?.scene.makeInactivePlayer()
+                    return
+                case .yourturn:
+                    self?.scene.makeActivePlayer()
+                    return
                 }
             }
-            
-//            if let decoded = try? decoder.decode([CardType].self, from: data) {
-//                print(decoded)
-//                self?.scene.setCards(cardTypes: decoded)
-//                return // give up once we've made sense of the message
-//            }
-            let message = String(decoding: data, as: UTF8.self)
-            print("client got the message: \(message)")
-            if message == "your turn" {
-                self?.scene.makeActivePlayer()
-                return
-            }
-            let stringBits = message.components(separatedBy: [" "])
-            if stringBits[0] == "reveal" {
-                self?.scene.revealCard(number: stringBits[1])
-            } else if stringBits[0] == "conceal" {
-                self?.scene.concealCard(number: stringBits[1])
-            } else if stringBits[0] == "remove" {
-                self?.scene.removeCard(number: stringBits[1])
-            } else if stringBits[0] == "endturn" {
-                self?.scene.makeInactivePlayer()
-            }
-            
-
         }
     }
 }

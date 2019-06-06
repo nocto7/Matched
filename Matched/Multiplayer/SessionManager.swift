@@ -71,7 +71,8 @@ class SessionManager {
             let player = otherPlayers[playerNumber - 1]
             print("\(player) is the current player")
             // send a message to tell them it's their turn
-            sendMessage(message: "your turn", player: player)
+            //sendMessage(message: "your turn", player: player)
+            yourTurn(player: player)
             return false
         }
     }
@@ -85,20 +86,61 @@ class SessionManager {
         }
     }
     
-    func broadcastMessage(message: String) {
-        print("broadcasting the message: \(message) to \(session.connectedPeers.count) other players")
-        let data = Data(message.utf8)
-        do {
-            try session.send(data, toPeers: session.connectedPeers, with: .reliable)
-        } catch {
-            print("message not sent properly from host")
-        }
+    
+    func endTurn() {
+        let message = GameMessage.endturn
+        sendMessage(message: message)
+    }
+    
+    func yourTurn(player: MCPeerID) {
+        let message = GameMessage.yourturn
+        sendMessage(message: message, player: player)
+    }
+    
+    func revealCard(card: Int) {
+        let message = GameMessage.reveal(card: card)
+        sendMessage(message: message)
+    }
+    
+    func concealCard(card: Int) {
+        let message = GameMessage.conceal(card: card)
+        sendMessage(message: message)
+    }
+    
+    func removeCard(card: Int) {
+        let message = GameMessage.remove(card: card)
+        sendMessage(message: message)
     }
     
     // used by the server to send the game setup to each client
     func shareGame(cards: [CardType]) {
         let message = GameMessage.setup(cards: cards)
         // send the cards as [CardType] to each client
+        sendMessage(message: message)
+        
+        // old version
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(cards) {
+            
+            guard let mcSession = SessionManager.shared.session else {
+                print("session is wonky")
+                return
+            }
+            print("session is ok!")
+            print("there are \(mcSession.connectedPeers.count) connected peers")
+            if mcSession.connectedPeers.count > 0 {
+                print ("someone to play with!")
+                //let data = Data("message from host".utf8)
+                do {
+                    try mcSession.send(encoded, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch {
+                    print("message not sent properly from host")
+                }
+            }
+        }
+    }
+    
+    func sendMessage(message: GameMessage) {
         let encoder = JSONEncoder()
         if let encodedGame = try? encoder.encode(message) {
             guard let mcSession = SessionManager.shared.session else {
@@ -117,24 +159,19 @@ class SessionManager {
                 }
             }
         }
-        
-        // old version
-        if let encoded = try? encoder.encode(cards) {
-            
+    }
+    
+    func sendMessage(message: GameMessage, player: MCPeerID) {
+        let encoder = JSONEncoder()
+        if let encodedGame = try? encoder.encode(message) {
             guard let mcSession = SessionManager.shared.session else {
                 print("session is wonky")
                 return
             }
-            print("session is ok!")
-            print("there are \(mcSession.connectedPeers.count) connected peers")
-            if mcSession.connectedPeers.count > 0 {
-                print ("someone to play with!")
-                //let data = Data("message from host".utf8)
-                do {
-                    try mcSession.send(encoded, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch {
-                    print("message not sent properly from host")
-                }
+            do {
+                try mcSession.send(encodedGame, toPeers: [player], with: .reliable)
+            } catch {
+                print("message not sent properly from host")
             }
         }
     }

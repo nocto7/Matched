@@ -51,18 +51,29 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
         DispatchQueue.main.async { [weak self] in
             print("yay! we have data at the host: \(data) from \(peerID.displayName)")
             
-            let message = String(decoding: data, as: UTF8.self)
-            print("server got the message: \(message)")
-            let stringBits = message.components(separatedBy: [" "])
-            if stringBits[0] == "reveal" {
-                self?.scene.revealCard(number: stringBits[1])
-            } else if stringBits[0] == "conceal" {
-                self?.scene.concealCard(number: stringBits[1])
-            } else if stringBits[0] == "remove" {
-                self?.scene.removeCard(number: stringBits[1])
-            } else if stringBits[0] == "endturn" {
-                self?.scene?.nextPlayer()
-                //self?.scene.isUserInteractionEnabled = SessionManager.shared.newPlayer()
+            let decoder = JSONDecoder()
+            if let gameMessage = try? decoder.decode(GameMessage.self, from: data) {
+                print ("we have received a GameMessage! \(gameMessage)")
+                switch gameMessage {
+                case .setup:
+                    // we're the server, ignore this
+                    return
+                case .reveal(let card):
+                    self?.scene.revealCard(number: card)
+                    return
+                case .conceal(let card):
+                    self?.scene.concealCard(number: card)
+                    return
+                case .remove(let card):
+                    self?.scene.removeCard(number: card)
+                    return
+                case .endturn:
+                    self?.scene?.nextPlayer()
+                    return
+                case .yourturn:
+                    // ignore this, we're the server
+                    return
+                }
             }
         }
     }
@@ -77,10 +88,6 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
         print(view.subviews)
         
         SessionManager.shared.session.delegate = self
-        
-        
-        //            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restart))
-        //            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
     }
     
     // this is just a debugging thing

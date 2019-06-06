@@ -16,9 +16,10 @@ enum GameMessage: Codable {
     case conceal(card: Int)
     case remove(card: Int)
     case endturn
+    case yourturn
     
     enum CodingKeys: String, CodingKey {
-        case setup, reveal, conceal, remove, endturn
+        case setup, reveal, conceal, remove, endturn, yourturn
     }
     
     func encode(to encoder: Encoder) throws {
@@ -34,6 +35,8 @@ enum GameMessage: Codable {
             try container.encode(card, forKey: .remove)
         case .endturn:
             try container.encode(true, forKey: .endturn)
+        case .yourturn:
+            try container.encode(true, forKey: .yourturn)
         }
     }
     
@@ -50,6 +53,9 @@ enum GameMessage: Codable {
             return
         } else if let _ = try? values.decode(Bool.self, forKey: .endturn) {
             self = .endturn
+            return
+        } else if let _ = try? values.decode(Bool.self, forKey: .yourturn) {
+            self = .yourturn
             return
         } else if let value = try? values.decode([CardType].self, forKey: .setup) {
             self = .setup(cards: value)
