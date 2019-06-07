@@ -10,6 +10,7 @@ import MultipeerConnectivity
 import SpriteKit
 
 class ClientGameScene: BaseGameScene {
+    var controller: ClientViewController!
     
     override func didMove(to view: SKView) {
         playerState = PlayerState(mode: .multi, status: .unknown, role: .client)
@@ -22,6 +23,19 @@ class ClientGameScene: BaseGameScene {
         let grid = CardGridInfo(items: cardTypes.count, windowSize: self.size)
         print("use grid \(grid)")
         setUpCards(cardTypes, grid)
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        if playerState.status == .waiting {
+            controller.turnLabel.text = "Other Player's Turn!"
+            isUserInteractionEnabled = false
+        } else if playerState.status == .current {
+            controller.turnLabel.text = ""
+            isUserInteractionEnabled = true
+        } else {
+            controller.turnLabel.text = "Waiting"
+            isUserInteractionEnabled = false
+        }
     }
     
 }

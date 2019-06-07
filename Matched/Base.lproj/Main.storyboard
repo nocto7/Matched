@@ -92,16 +92,29 @@
                                     <action selector="seeWho:" destination="unJ-om-LT9" eventType="touchUpInside" id="E8g-Mk-lE5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-fY-jFq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" name="MyYellowPalest"/>
+                                <color key="highlightedColor" name="MyYellowPalest"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="MyYellowDarkest"/>
                         <constraints>
+                            <constraint firstItem="CMS-fY-jFq" firstAttribute="leading" secondItem="dfD-ib-hPB" secondAttribute="leading" id="EyW-2E-aN7"/>
+                            <constraint firstItem="CMS-fY-jFq" firstAttribute="top" secondItem="dfD-ib-hPB" secondAttribute="top" id="H6o-Po-NoL"/>
                             <constraint firstItem="apI-vl-mGC" firstAttribute="bottom" secondItem="dfD-ib-hPB" secondAttribute="bottom" id="Jpi-Dg-Bej"/>
                             <constraint firstItem="apI-vl-mGC" firstAttribute="leading" secondItem="uH7-ge-QEw" secondAttribute="leadingMargin" id="Kw3-ov-LHf"/>
                             <constraint firstItem="apI-vl-mGC" firstAttribute="trailing" secondItem="uH7-ge-QEw" secondAttribute="trailingMargin" id="ct6-VA-INH"/>
+                            <constraint firstItem="CMS-fY-jFq" firstAttribute="trailing" secondItem="dfD-ib-hPB" secondAttribute="trailing" id="n8i-9d-B5K"/>
+                            <constraint firstItem="CMS-fY-jFq" firstAttribute="bottom" secondItem="dfD-ib-hPB" secondAttribute="bottom" id="z1o-FO-dNW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dfD-ib-hPB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="turnLabel" destination="CMS-fY-jFq" id="b6B-Cu-km3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9se-8l-FpV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -124,20 +137,33 @@
                                     <action selector="seeWho:" destination="8eG-kV-szY" eventType="touchUpInside" id="72e-hm-Neq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2N-NV-ZKa">
+                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" name="MyPinkPalest"/>
+                                <color key="highlightedColor" name="MyPinkPalest"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="MyPinkDark"/>
                         <constraints>
+                            <constraint firstItem="R2N-NV-ZKa" firstAttribute="top" secondItem="8Cv-bh-cyH" secondAttribute="top" id="1qo-7X-34Y"/>
                             <constraint firstItem="Kug-By-qfc" firstAttribute="bottom" secondItem="8Cv-bh-cyH" secondAttribute="bottom" id="5Y1-6M-41M"/>
                             <constraint firstItem="Kug-By-qfc" firstAttribute="trailing" secondItem="0i6-gb-dkZ" secondAttribute="trailingMargin" id="9XI-TQ-ElI"/>
+                            <constraint firstItem="R2N-NV-ZKa" firstAttribute="trailing" secondItem="8Cv-bh-cyH" secondAttribute="trailing" constant="-20" id="WOA-9c-cbx"/>
+                            <constraint firstItem="R2N-NV-ZKa" firstAttribute="leading" secondItem="8Cv-bh-cyH" secondAttribute="leading" constant="20" id="e7t-7B-DNY"/>
+                            <constraint firstItem="R2N-NV-ZKa" firstAttribute="bottom" secondItem="8Cv-bh-cyH" secondAttribute="bottom" id="lqB-qR-olI"/>
                             <constraint firstItem="Kug-By-qfc" firstAttribute="leading" secondItem="0i6-gb-dkZ" secondAttribute="leadingMargin" id="q2L-FH-qNg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Cv-bh-cyH"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="turnLabel" destination="R2N-NV-ZKa" id="J2H-Da-CJS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4J6-gs-asq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4844.927536231884" y="740.625"/>
+            <point key="canvasLocation" x="4843.4782608695659" y="740.625"/>
         </scene>
         <!--My Navigation Controller-->
         <scene sceneID="kJh-DH-HPL">

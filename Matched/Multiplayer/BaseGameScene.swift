@@ -156,13 +156,7 @@ class BaseGameScene: SKScene {
         print("game has this number of cards left: \(cards.count)")
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        if playerState.status == .current {
-            isUserInteractionEnabled = true
-        } else {
-            isUserInteractionEnabled = false
-        }
-    }
+
     
 
 }

@@ -89,7 +89,7 @@ class SessionManager {
     
     func endTurn() {
         let message = GameMessage.endturn
-        sendMessage(message: message)
+        broadcastMessage(message: message)
     }
     
     func yourTurn(player: MCPeerID) {
@@ -99,48 +99,28 @@ class SessionManager {
     
     func revealCard(card: Int) {
         let message = GameMessage.reveal(card: card)
-        sendMessage(message: message)
+        broadcastMessage(message: message)
     }
     
     func concealCard(card: Int) {
         let message = GameMessage.conceal(card: card)
-        sendMessage(message: message)
+        broadcastMessage(message: message)
     }
     
     func removeCard(card: Int) {
         let message = GameMessage.remove(card: card)
-        sendMessage(message: message)
+        broadcastMessage(message: message)
     }
     
     // used by the server to send the game setup to each client
     func shareGame(cards: [CardType]) {
         let message = GameMessage.setup(cards: cards)
-        // send the cards as [CardType] to each client
-        sendMessage(message: message)
-        
-        // old version
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(cards) {
-            
-            guard let mcSession = SessionManager.shared.session else {
-                print("session is wonky")
-                return
-            }
-            print("session is ok!")
-            print("there are \(mcSession.connectedPeers.count) connected peers")
-            if mcSession.connectedPeers.count > 0 {
-                print ("someone to play with!")
-                //let data = Data("message from host".utf8)
-                do {
-                    try mcSession.send(encoded, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch {
-                    print("message not sent properly from host")
-                }
-            }
-        }
+        broadcastMessage(message: message)
     }
     
-    func sendMessage(message: GameMessage) {
+
+    
+    func broadcastMessage(message: GameMessage) {
         let encoder = JSONEncoder()
         if let encodedGame = try? encoder.encode(message) {
             guard let mcSession = SessionManager.shared.session else {

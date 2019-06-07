@@ -11,6 +11,8 @@ import SpriteKit
 
 class MultiplayerGameScene: BaseGameScene {
 
+    var controller: MultiplayerGameViewController!
+    
     var level = 3 // start multiplayer game at higher level
     
     override func didMove(to view: SKView) {
@@ -61,7 +63,18 @@ class MultiplayerGameScene: BaseGameScene {
     }
     
 
-
+    override func update(_ currentTime: TimeInterval) {
+        if playerState.status == .waiting {
+            controller.turnLabel.text = "Other Player's Turn!"
+            isUserInteractionEnabled = false
+        } else if playerState.status == .current {
+            controller.turnLabel.text = ""
+            isUserInteractionEnabled = true
+        } else {
+            controller.turnLabel.text = "Waiting"
+            isUserInteractionEnabled = false
+        }
+    }
     
  
     

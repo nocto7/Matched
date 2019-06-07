@@ -13,6 +13,7 @@ import UIKit
 
 class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDelegate {
     var scene: MultiplayerGameScene!
+    @IBOutlet var turnLabel: UILabel!
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
@@ -120,6 +121,7 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
             
             // TODO hmmm, these are at the wrong size :(
             scene = MultiplayerGameScene(size: view.bounds.size)
+            scene.controller = self
             scene.scaleMode = .resizeFill //.aspectFill
             view.presentScene(scene)
             
@@ -148,5 +150,6 @@ class MultiplayerGameViewController: UIViewController, Storyboarded, MCSessionDe
     @objc func restart() {
         startGame()
     }
+    
     
 }

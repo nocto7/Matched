@@ -13,6 +13,7 @@ import UIKit
 class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
     weak var coordinator: MainCoordinator?
     var scene: ClientGameScene!
+    @IBOutlet var turnLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +23,7 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
         print(view.subviews)
         
         SessionManager.shared.session.delegate = self
-        
-        // startGame()
-        
-        // navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
     }
-    
-//    @objc func showConnectionPrompt() {
-//        coordinator?.connectToGame()
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         startGame()
@@ -44,6 +36,7 @@ class ClientViewController: UIViewController, Storyboarded, MCSessionDelegate {
             title = "Matched Game Client"
             
             scene = ClientGameScene(size: view.bounds.size)
+            scene.controller = self
             scene.scaleMode = .resizeFill //.aspectFill
             view.presentScene(scene)
             

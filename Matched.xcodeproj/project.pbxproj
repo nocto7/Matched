@@ -34,6 +34,18 @@
 		47E1B65D22A6703700EAC076 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1B65C22A6703700EAC076 /* PlayerState.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		47E1B65E22A9881A00EAC076 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		47080B012293FB7B00166675 /* Matched.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matched.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47080B042293FB7B00166675 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +180,7 @@
 				47080AFF2293FB7B00166675 /* Resources */,
 			);
 			buildRules = (
+				47E1B65E22A9881A00EAC076 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
